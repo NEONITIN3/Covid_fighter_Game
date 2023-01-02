@@ -51,6 +51,12 @@ console.log(pen); //its help u to draw something on canva
 // speed : 11
 // };
 //now instead of box lets optimized it 
+//
+
+
+//gameover detection
+
+game_over=false;
 e1={
         x : 90,
         y : 10,
@@ -128,6 +134,18 @@ canvas.addEventListener('mouseup',function(){
     player.moving = false; 
 });
 }
+
+//collision detection function
+function collision(rect1,rect2){
+    if(rect1.x<rect2.x+rect2.w &&
+        rect1.x+rect1.w>rect2.x &&
+         rect1.y + rect1.h >rect2.y){
+            return true
+         }
+        return false;
+        //in update function me check it
+
+}
  
 function draw(){
     pen.clearRect(0,0,W,H)
@@ -192,9 +210,22 @@ function update(){
             enemy[i].speed *= -1 //speed direction changes
         }
     }
+
+//overlapping checking (collision check)
+if(collision(player,gems)){
+    console.log("You Won !");
+    alert("You Win the Game");
+    game_over=true //for termination
+    return;
+
+}
+
 }
 
 function gameloop(){
+    if(game_over==true){
+        clearInterval(f);
+    }
     draw();
     update();
     console.log("In gameLoop");
