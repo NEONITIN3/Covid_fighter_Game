@@ -219,6 +219,15 @@ if(collision(player,gems)){
     return;
 
 }
+//virus se collision
+for(let i=0;i<enemy.length;i++){
+if(collision(player,enemy[i])){
+    console.log("You loss !");
+    alert("You loss the Game");
+    game_over=true //for termination
+    return;
+}
+}
 
 }
 
